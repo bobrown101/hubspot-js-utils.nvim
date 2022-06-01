@@ -82,7 +82,7 @@ local function mkdirp(path)
     local result = nil
     Job:new({
         command = "mkdir",
-        args = {"-p", filepath},
+        args = {"-p", path},
         on_exit = function(j, return_val) result = j:result() end
     }):sync()
     return result
@@ -102,6 +102,7 @@ local function writeLineToFile(filepath, line)
     local f = assert(io.open(filepath, "a"))
     f:write(line, "\n")
     f:close()
+    return
 end
 
 local function get_substring_before_and_after_match(mainstring, substring)
